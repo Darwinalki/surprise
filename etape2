@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Mot de passe</title>
+<style>
+body{background:black;color:white;text-align:center;font-family:Arial;}
+input{padding:10px;font-size:18px;margin-top:20px;}
+</style>
+</head>
+<body>
+
+<h1>Mot de passe final 🔒</h1>
+<p>Ce que tu as compris depuis le début est la clé.</p>
+
+<input type="text" id="mdp" placeholder="Mot de passe">
+<button onclick="check()">Valider</button>
+
+<script>
+function check(){
+if(document.getElementById("mdp").value.toLowerCase()==="vba"){
+alert("Bravo ❤️ Ouvre ton fichier Word.");
+}else{
+alert("Pas encore 😏");
+}}
+</script>
+
+</body>
+</html>

@@ -1,142 +1,152 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<title>Épreuve</title>
-<style>
-body {
-  margin:0;
-  background:#0f0f0f url('ova.jpg') no-repeat center center;
-  background-size: cover;
-  color:#00ff88;
-  font-family:monospace;
-  text-align:center;
-  overflow:hidden;
-}
+    <meta charset="UTF-8">
+    <title>Épreuve</title>
+    <style>
+        body {
+            margin: 0;
+            background: #0f0f0f;
+            color: #00ff88;
+            font-family: monospace;
+            text-align: center;
+            overflow: hidden;
+        }
 
-#container {
-  margin-top:40px;
-  color:white;
-  font-family:Arial;
-}
+        #container {
+            margin-top: 40px;
+            color: white;
+            font-family: Arial;
+        }
 
-#btnSuivant {
-  position:absolute;
-  padding:15px 30px;
-  font-size:18px;
-  border:none;
-  border-radius:10px;
-  background:#ff4d6d;
-  color:white;
-  cursor:pointer;
-}
+        img {
+            max-width: 80%;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(255,255,255,0.2);
+        }
 
-#fakeCode {
-  display:none;
-  position:fixed;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  width:80%;
-  max-width:600px;
-  background:black;
-  border:2px solid #00ff88;
-  padding:20px;
-  text-align:left;
-  box-shadow:0 0 20px #00ff88;
-}
+        #btnSuivant {
+            position: absolute;
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            background: #ff4d6d;
+            color: white;
+            cursor: pointer;
+        }
 
-input {
-  width:100%;
-  padding:10px;
-  background:#111;
-  color:#00ff88;
-  border:none;
-  margin-top:10px;
-}
+        #fakeCode {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 600px;
+            background: black;
+            border: 2px solid #00ff88;
+            padding: 20px;
+            text-align: left;
+            box-shadow: 0 0 20px #00ff88;
+        }
 
-button {
-  margin-top:10px;
-  padding:10px 15px;
-  background:#00ff88;
-  border:none;
-  cursor:pointer;
-}
+        input {
+            width: 100%;
+            padding: 10px;
+            background: #111;
+            color: #00ff88;
+            border: none;
+            margin-top: 10px;
+        }
 
-#messageMobile {
-  display:none;
-  font-size:22px;
-  margin-top:100px;
-  color:white;
-}
-</style>
+        button {
+            margin-top: 10px;
+            padding: 10px 15px;
+            background: #00ff88;
+            border: none;
+            cursor: pointer;
+        }
+
+        #messageMobile {
+            display: none;
+            font-size: 22px;
+            margin-top: 100px;
+            color: white;
+        }
+    </style>
 </head>
 <body>
 
-<div id="container">
-<h1>Épreuve 1</h1>
-<p>Résous l’énigme pour continuer…</p>
-<!-- L'image est maintenant en background, donc pas besoin de <img> -->
-</div>
+    <div id="container">
+        <h1>Épreuve 1</h1>
+        <p>Résous l’énigme pour continuer…</p>
+        <img src="enigme.jpg">
+    </div>
 
-<button id="btnSuivant">Suivant</button>
+    <button id="btnSuivant">Suivant</button>
 
-<div id="fakeCode">
-<p>> SYSTEM LOCKED</p>
-<p>> Indice :</p>
-<p style="color:white;font-family:Arial;font-size:20px;">Je suis le numéro 5</p>
-<input type="text" id="codeInput" placeholder="Entrer le code">
-<button onclick="checkCode()">Valider</button>
-</div>
+    <div id="fakeCode">
+        <p>> SYSTEM LOCKED</p>
+        <p>> Indice :</p>
+        <p style="color:white;font-family:Arial;font-size:20px;">Je suis le numéro 5</p>
+        <input type="text" id="codeInput" placeholder="Entrer le code">
+        <button onclick="checkCode()">Valider</button>
+    </div>
 
-<div id="messageMobile">
-Il faut que tu utilises un ordinateur mon bb 💻❤️
-</div>
+    <div id="messageMobile">
+        Il faut que tu utilises un ordinateur mon bb 💻❤️
+    </div>
 
-<script>
-const btn = document.getElementById("btnSuivant");
-let unlocked = false;
+    <script>
+        const btn = document.getElementById("btnSuivant");
+        let unlocked = false;
 
-// Bloque mobile
-if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
-  document.body.innerHTML = document.getElementById("messageMobile").outerHTML;
-}
+        // Bloque mobile
+        if (/Mobi|Android|iPhone/i.test(navigator.userAgent)){
+            document.body.innerHTML = document.getElementById("messageMobile").outerHTML;
+        }
 
-btn.style.top = "70%";
-btn.style.left = "45%";
+        btn.style.top = "70%";
+        btn.style.left = "45%";
 
-// Bouton qui fuit
-document.addEventListener("mousemove", function(e){
-  if(unlocked) return;
-  const rect = btn.getBoundingClientRect();
-  const distance = Math.hypot(e.clientX - rect.left, e.clientY - rect.top);
-  if(distance < 120){
-    btn.style.left = Math.random()*(window.innerWidth-100) + "px";
-    btn.style.top = Math.random()*(window.innerHeight-50) + "px";
-  }
-});
+        // Bouton qui fuit
+        document.addEventListener("mousemove", function(e){
+            if(unlocked) return;
+            const rect = btn.getBoundingClientRect();
+            const distance = Math.hypot(e.clientX - rect.left, e.clientY - rect.top);
+            if(distance < 120){
+                btn.style.left = Math.random()*(window.innerWidth-100) + "px";
+                btn.style.top = Math.random()*(window.innerHeight-50) + "px";
+            }
+        });
 
-// Ouvre la console quand elle clique
-document.addEventListener("click", function(e){
-  if(!unlocked && e.target.id !== "codeInput"){
-    document.getElementById("fakeCode").style.display = "block";
-  }
-});
+        // Ouvre la console quand elle clique
+        document.addEventListener("click", function(e){
+            if(!unlocked && e.target.id !== "codeInput"){
+                document.getElementById("fakeCode").style.display = "block";
+            }
+        });
 
-function checkCode(){
-  const val = document.getElementById("codeInput").value.toLowerCase().trim();
-  if(val === "se filmer"){
-    unlocked = true;
-    document.getElementById("fakeCode").style.display = "none";
-    btn.style.background = "#4CAF50";
-    btn.innerText = "Télécharger la surprise 💝";
-  } else {
-    alert("Code incorrect 💔");
-  }
-}
+        function checkCode(){
+            const val = document.getElementById("codeInput").value.toLowerCase().trim();
+            if(val === "se filmer"){
+                unlocked = true;
+                document.getElementById("fakeCode").style.display = "none";
+                btn.style.background = "#4CAF50";
+                btn.innerText = "Tu m’as eue 😏 Clique";
+            } else {
+                alert("Code incorrect 💔");
+            }
+        }
 
-// Téléchargement direct du PDF quand bouton cliqué
-btn.addEventListener("click", () => {
-  if(unlocked){
-    const a = document.createElement("a");
-    a.href = "surprise.pdf";  // ton PDF à télécharger
+        // Action du bouton
+        btn.addEventListener("click", ()=>{
+            if(unlocked){
+                window.location.href = "etape2.html";
+            }
+        });
+    </script>
+
+</body>
+</html>

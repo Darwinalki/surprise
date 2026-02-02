@@ -1,7 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Épreuve</title>
+<style>
+body {margin:0; background:#111; color:white; font-family:Arial; text-align:center; overflow:hidden;}
+#container{margin-top:40px;}
+img{max-width:80%; border-radius:12px; box-shadow:0 0 20px rgba(255,255,255,0.2);}
+
+/* Bouton bleu */
+#btnSuivant{
+  position:absolute;
+  padding:15px 30px;
+  font-size:18px;
+  border:none;
+  border-radius:10px;
+  background:#007BFF;
+  color:white;
+  cursor:pointer;
+}
+
+/* Popup */
+#popup{
+  display:none;
+  position:fixed;
+  top:50%; left:50%;
+  transform:translate(-50%,-50%);
+  background:black;
+  color:#00ff88;
+  padding:25px;
+  border-radius:10px;
+  box-shadow:0 0 20px #00ff88;
+  font-family:monospace;
+  width:80%;
+  max-width:400px;
+}
+
+input{
+  width:100%;
+  padding:10px;
+  margin-top:15px;
+  font-size:16px;
+}
+
+button{
+  margin-top:10px;
+  padding:10px 15px;
+  font-size:16px;
+}
+
+#messageMobile{display:none;font-size:22px;margin-top:100px;}
+</style>
+</head>
+<body>
+
+<div id="container">
+<h1>Épreuve 1</h1>
+<p>Résous l’énigme pour continuer…</p>
+<img src="enigme.jpg">
+</div>
+
+<button id="btnSuivant">Suivant</button>
+
+<div id="popup">
+<p><b>Je suis le numéro 5</b></p>
+<input type="text" id="reponse" placeholder="Entre la réponse">
+<button onclick="verifier()">Valider</button>
+</div>
+
+<div id="messageMobile">
+Il faut que tu utilises un ordinateur mon bb 💻❤️
+</div>
+
+<script>
 const btn = document.getElementById("btnSuivant");
 let unlocked = false;
 
-// Bloque mobile (optionnel pour desktop)
+// Bloque mobile (optionnel)
 if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
   document.body.innerHTML = document.getElementById("messageMobile").outerHTML;
 }
@@ -10,9 +85,9 @@ if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
 btn.style.top = "70%";
 btn.style.left = "45%";
 
-// Bouton qui fuit
+// Bouton qui fuit toujours tant que non débloqué
 document.addEventListener("mousemove", function(e) {
-  if (unlocked) return;
+  if (unlocked) return; // Une fois débloqué, ne fuit plus
   const rect = btn.getBoundingClientRect();
   const dist = Math.hypot(e.clientX - rect.left, e.clientY - rect.top);
   if (dist < 120) {
@@ -21,22 +96,24 @@ document.addEventListener("mousemove", function(e) {
   }
 });
 
-// Ouvre popup
+// Ouvre popup quand on clique n'importe où
 document.addEventListener("click", function(e) {
   if (!unlocked && e.target.id !== "reponse" && e.target.id !== "btnSuivant") {
     document.getElementById("popup").style.display = "block";
   }
 });
 
+// Vérification de la réponse
 function verifier() {
   let val = document.getElementById("reponse").value.toLowerCase().trim();
   if (val === "se filmer") {
     unlocked = true;
     document.getElementById("popup").style.display = "none";
-    btn.style.background = "#4CAF50";
-    btn.innerText = "Télécharger la surprise";
+    btn.innerText = "Maintenant la suite bebsitou";
+    btn.style.background = "#28a745"; // vert pour indiquer que c'est débloqué
+    alert("t'es trop forte la femme de ma vie !! passons à la suite...");
   } else {
-    alert("Mauvaise réponse, essaye encore !");
+    alert("Mauvaise réponse mon bb... essay à nouveau");
   }
 }
 
@@ -49,3 +126,7 @@ btn.addEventListener("click", () => {
     a.click();
   }
 });
+</script>
+
+</body>
+</html>

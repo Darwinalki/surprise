@@ -93,7 +93,7 @@ btn.style.top=Math.random()*(window.innerHeight-50)+"px";
 }
 });
 
-// Ouvre popup quand elle clique
+// Ouvre popup
 document.addEventListener("click",function(e){
 if(!unlocked && e.target.id!=="reponse"){
 document.getElementById("popup").style.display="block";
@@ -106,12 +106,13 @@ if(val==="se filmer"){
 unlocked=true;
 document.getElementById("popup").style.display="none";
 btn.style.background="#4CAF50";
-btn.innerText="Clique maintenant 😏";
+btn.innerText="Télécharger la surprise 💝";
 }else{
 alert("Mauvaise réponse 💔");
 }
 }
 
+// 📥 Téléchargement direct du PDF
 btn.addEventListener("click",()=>{
 if(unlocked){
 const a=document.createElement("a");
@@ -120,8 +121,7 @@ a.download="Surprise.pdf";
 a.click();
 }
 });
-
-
+</script>
 
 </body>
 </html>
